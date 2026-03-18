@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>+200 Dinâmicas para Célula de Jovens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://i.imgur.com">
+    <link rel="preconnect" href="https://app.litevideo.net">
+    <link rel="preconnect" href="https://cdn.utmify.com.br">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://app.litevideo.net/p.js" as="script">
+    <script src="https://app.litevideo.net/p.js" async></script>
+    <script>
+      // Prevent circular reference errors in third-party tracking scripts (like Utmify)
+      // when they try to JSON.stringify React DOM elements.
+      if (!Element.prototype.toJSON) {
+        Element.prototype.toJSON = function() {
+          return {
+            tagName: this.tagName,
+            className: typeof this.className === 'string' ? this.className : (this.className && this.className.baseVal) || '',
+            id: this.id
+          };
+        };
+      }
+    </script>
+    <script>
+      window.pixelId = "69b48201e452818d72c4bf9c";
+      // Delay tracking script to prioritize LCP and TBT
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var a = document.createElement("script");
+          a.setAttribute("async", "");
+          a.setAttribute("defer", "");
+          a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+          document.head.appendChild(a);
+        }, 1500);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
