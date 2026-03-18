@@ -1,43 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Loader2 } from 'lucide-react';
 
 export function VSLPlayer() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Função para checar se o LiteVideo já injetou o player
-    const checkVideoLoad = () => {
-      if (containerRef.current) {
-        const ltElement = containerRef.current.querySelector('lt-v2');
-        if (ltElement) {
-          // Verifica se o LiteVideo já injetou o iframe ou shadow DOM
-          const hasShadowRoot = !!ltElement.shadowRoot;
-          const hasChildren = ltElement.children.length > 0;
-          const hasContent = ltElement.innerHTML.length > 10;
-          
-          if (hasShadowRoot || hasChildren || hasContent) {
-            // Dá um pequeno delay extra para garantir que a thumbnail renderizou visualmente
-            setTimeout(() => setIsLoaded(true), 800);
-            return true;
-          }
-        }
+    // Observador para detectar quando o player da LiteVideo injeta o conteúdo
+    const checkReady = () => {
+      if (!containerRef.current) return false;
+      const lt = containerRef.current.querySelector('lt-v2');
+      if (!lt) return false;
+      
+      // Verifica se o shadowRoot foi criado e tem conteúdo (padrão novo da LiteVideo)
+      if (lt.shadowRoot && lt.shadowRoot.childNodes.length > 0) {
+        return true;
       }
+      
+      // Verifica se injetou iframe ou video diretamente (padrão antigo)
+      if (lt.querySelector('iframe, video')) {
+        return true;
+      }
+      
       return false;
     };
 
-    // Checa a cada 300ms
+    // Checa a cada 150ms
     const interval = setInterval(() => {
-      if (checkVideoLoad()) {
+      if (checkReady()) {
+        // Adiciona um pequeno delay para garantir que a thumbnail renderizou visualmente
+        setTimeout(() => setIsReady(true), 400);
         clearInterval(interval);
       }
-    }, 300);
+    }, 150);
 
-    // Fallback de segurança: remove o loader após 15 segundos
+    // Fallback de segurança: libera a tela após 4 segundos de qualquer forma
+    // para garantir que o usuário nunca fique travado na tela de carregamento
     const timeout = setTimeout(() => {
-      setIsLoaded(true);
+      setIsReady(true);
       clearInterval(interval);
-    }, 15000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
@@ -53,17 +54,21 @@ export function VSLPlayer() {
       */}
       <div 
         ref={containerRef}
-        className="relative w-full rounded-3xl overflow-hidden shadow-2xl bg-slate-900 aspect-[9/16] border-4 border-slate-100"
+        className="relative w-full rounded-3xl overflow-hidden shadow-2xl bg-slate-50 aspect-[9/16] border-4 border-slate-100"
       >
-        {/* Loading State Overlay */}
+        
+        {/* Overlay Claro de Carregamento (Fica por cima e esconde a tela preta do player) */}
         <div 
-          className={`absolute inset-0 flex flex-col items-center justify-center z-20 bg-slate-900 transition-opacity duration-700 pointer-events-none ${
-            isLoaded ? 'opacity-0' : 'opacity-100'
+          className={`absolute inset-0 flex flex-col items-center justify-center bg-slate-50 z-20 transition-opacity duration-500 pointer-events-none ${
+            isReady ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <Loader2 className="w-10 h-10 animate-spin mb-4 text-brand-purple" />
-          <span className="text-sm font-medium text-slate-300 animate-pulse">
-            Carregando vídeo...
+          <div className="relative flex items-center justify-center mb-4">
+            <div className="w-12 h-12 border-4 border-slate-200 rounded-full"></div>
+            <div className="w-12 h-12 border-4 border-brand-purple rounded-full border-t-transparent animate-spin absolute"></div>
+          </div>
+          <span className="text-sm font-semibold text-slate-500 animate-pulse">
+            Preparando vídeo...
           </span>
         </div>
 

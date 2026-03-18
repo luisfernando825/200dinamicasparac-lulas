@@ -25,6 +25,7 @@ import {
   Cross
 } from 'lucide-react';
 import { useState, useEffect, memo, useRef } from 'react';
+import { motion } from 'motion/react';
 import { VSLPlayer } from './components/VSLPlayer';
 
 const CrossIcon = ({ className }: { className?: string }) => (
@@ -110,7 +111,12 @@ export default function App() {
         <DoveIcon className="absolute bottom-12 right-4 sm:bottom-20 sm:right-8 md:right-20 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 text-brand-blue/5 rotate-12 pointer-events-none" />
         <Flame className="absolute top-24 right-8 sm:top-32 sm:right-12 md:right-32 w-12 h-12 sm:w-16 sm:h-16 text-orange-500/5 pointer-events-none" />
 
-        <div className="container mx-auto px-4 sm:px-6 max-w-4xl relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 sm:px-6 max-w-4xl relative z-10"
+        >
           <div className="flex flex-col items-center text-center">
             
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple-dark text-[10px] sm:text-xs font-bold tracking-wide uppercase mb-6 sm:mb-8">
@@ -141,7 +147,7 @@ export default function App() {
                 <div className="flex -space-x-3">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center overflow-hidden shadow-sm">
-                      <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" decoding="async" fetchPriority="high" />
+                      <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" decoding="async" loading="lazy" />
                     </div>
                   ))}
                 </div>
@@ -168,12 +174,18 @@ export default function App() {
             </div>
 
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* NOVO: SEÇÃO DE FRUSTRAÇÕES */}
       <section className="py-20 bg-white border-b border-slate-100">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-5xl"
+        >
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase">
               LÍDERES SEM UTILIZAR AS +200 DINÂMICAS
@@ -226,12 +238,18 @@ export default function App() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* SEÇÃO DA SOLUÇÃO E MOCKUP */}
       <section className="py-20 bg-slate-50 border-b border-slate-100">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-5xl"
+        >
           <div className="max-w-3xl mx-auto flex flex-col items-center text-center mb-16">
             <h2 className="text-2xl md:text-3xl font-black text-brand-purple uppercase tracking-widest mb-6">
               A Solução
@@ -246,7 +264,7 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-purple/20 to-brand-blue/20 rounded-[3rem] blur-3xl -z-10 transform rotate-2 scale-105"></div>
             <img src="https://i.imgur.com/ZS9ggsf.webp" alt="Mockup do Material" className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
           </div>
-        </div>
+        </motion.div>
       </section>
 
 
@@ -254,7 +272,13 @@ export default function App() {
       {/* 4. SEÇÃO DE CATEGORIAS */}
       <section className="py-20 bg-slate-50 relative overflow-hidden">
         <DoveIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] text-slate-200/40 pointer-events-none" />
-        <div className="container mx-auto px-4 max-w-4xl relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-4xl relative z-10"
+        >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Dinâmicas para cada momento</h2>
             <p className="text-slate-600">Organizadas por categorias para você achar exatamente o que precisa em segundos.</p>
@@ -274,12 +298,18 @@ export default function App() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 5. SEÇÃO DE BÔNUS */}
       <section className="py-20 bg-white text-slate-900">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 sm:px-6 max-w-7xl"
+        >
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-purple/10 mb-6 shadow-sm border border-brand-purple/20">
               <span className="text-3xl">🎁</span>
@@ -323,41 +353,47 @@ export default function App() {
                 oldPrice: "39,90"
               }
             ].map((bonus, i) => (
-              <div key={i} className="bg-white rounded-3xl border-2 border-slate-200 overflow-hidden flex flex-col group hover:border-brand-purple/50 transition-all duration-300 max-w-[340px] mx-auto sm:max-w-none w-full shadow-lg hover:shadow-xl hover:shadow-brand-purple/10 hover:-translate-y-1 transform-gpu">
-                <div className="aspect-[4/5] relative overflow-hidden bg-slate-50 p-4 flex items-center justify-center border-b-2 border-slate-100">
+              <div key={i} className="bg-white rounded-3xl border-2 border-slate-200 overflow-hidden flex flex-col group hover:border-brand-purple/50 transition-all duration-300 w-full max-w-[420px] mx-auto sm:max-w-none shadow-lg hover:shadow-xl hover:shadow-brand-purple/10 hover:-translate-y-1 transform-gpu">
+                <div className="aspect-[4/5] relative overflow-hidden bg-white flex items-center justify-center border-b-2 border-slate-100">
                   <img 
                     src={bonus.image} 
                     alt={bonus.title} 
-                    className={`w-full h-full object-contain transition-transform duration-500 drop-shadow-2xl transform-gpu ${i === 4 ? 'scale-125 group-hover:scale-[1.35]' : 'group-hover:scale-105'}`}
+                    className={`w-full h-full object-contain transition-transform duration-500 transform-gpu ${i === 4 ? 'scale-110 group-hover:scale-125' : 'scale-95 group-hover:scale-105'}`}
                     referrerPolicy="no-referrer"
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute top-4 left-4 bg-brand-purple text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg z-10">
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-brand-purple text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg z-10">
                     Bônus {i + 1}
                   </div>
                 </div>
-                <div className="p-5 sm:p-6 flex flex-col items-center justify-center bg-white text-center flex-1">
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-3 leading-snug">{bonus.title}</h3>
+                <div className="p-5 sm:p-6 flex flex-col items-center justify-center bg-slate-50 text-center flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 leading-snug">{bonus.title}</h3>
                   <div className="flex flex-col items-center justify-center gap-1 mt-auto">
                     <span className="text-sm text-slate-500 line-through decoration-red-500/50">De R$ {bonus.oldPrice}</span>
-                    <span className="text-[#22C55E] font-black text-xl uppercase tracking-wide">Por Grátis</span>
+                    <span className="text-[#22C55E] font-black text-2xl uppercase tracking-wide">Por Grátis</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* SEÇÃO DE DEPOIMENTOS */}
       <section className="py-20 bg-white overflow-hidden">
-        <div className="container mx-auto px-4 mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 mb-12"
+        >
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">O que estão dizendo</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">Veja o impacto que o material está causando em outras células.</p>
           </div>
-        </div>
+        </motion.div>
         
         {/* Marquee Container */}
         <div className="relative flex overflow-x-hidden group gap-6">
@@ -416,7 +452,13 @@ export default function App() {
 
       {/* 6. SEÇÃO DE PLANOS */}
       <section id="planos" className="py-24 bg-slate-50">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-4xl"
+        >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Escolha o melhor plano</h2>
             <p className="text-slate-600">Pagamento único. Acesso vitalício.</p>
@@ -425,7 +467,7 @@ export default function App() {
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto items-center">
             
             {/* Plano Simples */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col h-full">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col h-full">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-slate-900">Plano Simples</h3>
                 <div className="mt-4 flex items-baseline text-4xl font-extrabold text-slate-900">
@@ -439,8 +481,8 @@ export default function App() {
                   "Acesso imediato",
                   "PDF organizado"
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-slate-600">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                  <li key={i} className="flex items-center gap-3 text-slate-700 text-lg">
+                    <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -448,14 +490,14 @@ export default function App() {
               
               <button 
                 onClick={() => setIsUpsellModalOpen(true)}
-                className="w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl transition-colors"
+                className="w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl transition-colors text-base sm:text-lg"
               >
                 ADQUIRIR O PLANO SIMPLES
               </button>
             </div>
 
             {/* Plano Completo */}
-            <div className="bg-white p-8 rounded-[20px] border-2 border-brand-purple shadow-2xl shadow-brand-purple/20 flex flex-col h-full relative transform md:-translate-y-4 hover:scale-105 transition-all duration-300 z-10">
+            <div className="bg-white p-6 sm:p-8 rounded-[20px] border-2 border-brand-purple shadow-2xl shadow-brand-purple/20 flex flex-col h-full relative transform md:-translate-y-4 hover:scale-105 transition-all duration-300 z-10">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 px-5 py-1.5 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-widest shadow-lg whitespace-nowrap flex items-center gap-1.5 border border-amber-300">
                 ⭐ MAIS POPULAR ENTRE LÍDERES
               </div>
@@ -476,9 +518,9 @@ export default function App() {
                   "Material extra",
                   "Suporte prioritário via WhatsApp"
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-700 font-medium text-sm md:text-base">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center border border-emerald-200">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <li key={i} className="flex items-center gap-3 text-slate-800 font-medium text-lg">
+                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center border border-emerald-200">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                     </div>
                     <span>{feature}</span>
                   </li>
@@ -502,12 +544,18 @@ export default function App() {
               <span className="text-lg">🔒</span> Pagamento 100% seguro
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 7. GARANTIA */}
       <section className="py-16 bg-white border-y border-slate-100">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-2xl text-center"
+        >
           <img 
             src="https://i.imgur.com/MeA4A3f.webp" 
             alt="Selo de Garantia de 7 Dias" 
@@ -520,13 +568,19 @@ export default function App() {
           />
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Teste por 7 dias sem risco</h2>
           <p className="text-slate-600 text-lg">Se você não gostar do material ou achar que não serve para a sua célula, devolvemos 100% do seu valor. Sem perguntas.</p>
-        </div>
+        </motion.div>
       </section>
 
       {/* 8. FAQ */}
       <section className="py-20 bg-slate-800 relative overflow-hidden">
         <CrossIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] text-slate-700/30 pointer-events-none" />
-        <div className="container mx-auto px-4 max-w-3xl relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-3xl relative z-10"
+        >
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Perguntas Frequentes</h2>
           </div>
@@ -542,14 +596,20 @@ export default function App() {
               <FAQItem key={i} question={faq.q} answer={faq.a} />
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 9. CTA FINAL */}
       <section className="py-24 bg-white text-center relative overflow-hidden">
         <DoveIcon className="absolute top-10 left-10 w-24 h-24 text-brand-blue/5 -rotate-12 pointer-events-none" />
         <CrossIcon className="absolute bottom-10 right-10 w-32 h-32 text-brand-purple/5 rotate-12 pointer-events-none" />
-        <div className="container mx-auto px-4 max-w-3xl relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 max-w-3xl relative z-10"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Pare de perder tempo pensando no que fazer na célula.</h2>
           <p className="text-xl text-slate-600 mb-10">Tenha um arsenal de dinâmicas prontas na palma da sua mão e foque no que realmente importa: pastorear seus jovens.</p>
           
@@ -557,7 +617,7 @@ export default function App() {
             ACESSAR AS DINÂMICAS AGORA
             <ArrowRight className="w-6 h-6" />
           </a>
-        </div>
+        </motion.div>
       </section>
 
       {/* FOOTER */}
